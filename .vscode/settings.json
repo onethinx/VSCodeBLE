@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "cycfg.h": "c",
+        "cycfg_pins.h": "c",
+        "cy_gpio.h": "c",
+        "onethinxcore01.h": "c",
+        "cy_syspm.h": "c",
+        "cycfg_ble.h": "c",
+        "cy_pdl.h": "c",
+        "cy_device.h": "c"
+    },
+    "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+    "cortex-debug.openocdPath": "C:/ModusToolbox_1.0/tools/openocd-1.0/bin/openocd.exe",
+    "cortex-debug.JLinkGDBServerPath": "C:/Program Files (x86)/SEGGER/JLink_V642c/JLinkGDBServerCL.exe",
+}

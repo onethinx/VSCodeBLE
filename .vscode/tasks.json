@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "PSoC Config",
+            "type": "shell",
+            "args": [
+                "${workspaceRoot}/design/design.PSoCconfig"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/design"
+            },
+            "command": "C:\\ModusToolbox_1.0\\tools\\device-configurator-1.0\\device-configurator.exe",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build All: Debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "command": "cmake.exe",
+            "args": [
+                "\"--build . --config Debug --target all -- -j 6\"", 
+            ]
+        }
+    ]
+}

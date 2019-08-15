@@ -1,0 +1,157 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CM4 Debug Kitprog",
+            "type": "cortex-debug",
+            "request": "launch",
+            "device": "PSoC6",
+            "servertype": "openocd",
+            "cwd": "${workspaceRoot}/build",
+            "executable": "MyApp_signed.elf",
+            "svdFile": "${workspaceFolder}/config/svd/psoc6_01.svd",
+            "searchDir": [
+                "C:/ModusToolbox_1.0/tools/openocd-1.0/scripts",
+                "${workspaceRoot}/config/openocd"
+            ],
+            "configFiles": [
+                "board_cm4.cfg"
+            ],
+            //"preLaunchTask": "Build All: Debug",
+            "preLaunchCommands": [
+                //from cm0
+                //"set mem inaccessible-by-default off",
+                //"mon reset;reset init",
+                //"b main",
+                //from cm4
+                "set mem inaccessible-by-default off",
+                //"mon psoc6 reset_halt sysresetreq"
+            ],
+            "postLaunchCommands": [
+                // use "b main" to break at main(), use b Cy_OnResetUser to break at the Reset Handler
+                //from cm0
+                //"interrupt",
+                //"b main",
+                //"continue"
+                //from cm4
+                "monitor arm semihosting enable",
+                "monitor reset run",
+                "tbreak main",
+                //"b main",
+                "continue",
+                "monitor halt"
+            ],
+            "postRestartCommands": [
+                //from cm0
+                //"interrupt",
+                //"mon psoc6 reset_halt",
+                //"b main",
+                //"continue"
+                //from cm4
+                //"b main",
+                //"continue"
+                "mon psoc6 reset_halt sysresetreq",
+                "monitor reset run",
+                "tbreak main",
+                "step",
+                //"continue",
+                "monitor halt"
+            ]
+        },
+        {
+            "name": "CM4 Debug Kitprog old",
+            "type": "cortex-debug",
+            "request": "launch",
+            "device": "PSoC6",
+            "servertype": "openocd",
+            "cwd": "${workspaceRoot}/build",
+            "executable": "MyApp_signed.elf",
+            "svdFile": "${workspaceFolder}/config/svd/psoc6_01.svd",
+            "searchDir": [
+                "C:/ModusToolbox_1.0/tools/openocd-1.0/scripts",
+                "${workspaceRoot}/config/openocd"
+            ],
+            "configFiles": [
+                "board_cm4.cfg"
+            ],
+            //"preLaunchTask": "Build All: Debug",
+            "preLaunchCommands": [
+                //from cm0
+                //"set mem inaccessible-by-default off",
+                //"mon reset;reset init",
+                //"b main",
+                //from cm4
+                "set mem inaccessible-by-default off",
+                "mon psoc6 reset_halt sysresetreq"
+            ],
+            "postLaunchCommands": [
+                // use "b main" to break at main(), use b Cy_OnResetUser to break at the Reset Handler
+                //from cm0
+                //"interrupt",
+                "b main",
+                "continue"
+            ],
+            "postRestartCommands": [
+                //from cm0
+                //"interrupt",
+                //"mon psoc6 reset_halt",
+                //"b main",
+                //"continue"
+                //from cm4
+                "b main",
+                "continue"
+            ]
+        },
+        {
+            "name": "CM4 Debug J-Link",
+            "type": "cortex-debug",
+            "request": "launch",
+            "device": "CY8C6xx7_CM4",
+            "servertype": "jlink",
+            "cwd": "${workspaceRoot}/build",
+            "executable": "MyApp_signed.elf",
+            //"debuggerArgs": ["-singlerun -strict -timeout 0 -nogui"],
+            "svdFile": "${workspaceFolder}/config/svd/psoc6_01.svd",
+            "interface": "swd",
+            //"preLaunchTask": "Build All: Debug",
+            "preLaunchCommands": [
+                "set mem inaccessible-by-default off",
+                "monitor speed 4000",
+                "monitor clrbp",
+                "monitor reset 0",
+                "monitor halt",
+                "monitor regs",
+                "monitor speed auto",
+                "monitor flash breakpoints 1",
+                "monitor semihosting enable",
+                "monitor reset 0",
+            ],
+            "postLaunchCommands": [
+                "monitor clrbp",
+                "monitor reset 0",
+                "monitor halt",
+                "monitor reset 0",
+                "tbreak main",
+                "continue",
+                "monitor halt",
+                //
+                //"interrupt",
+                //"monitor regs",
+                //  "monitor regs",
+                // "continue",
+            ],
+            "postRestartCommands": [
+                "monitor clrbp",
+                "monitor reset 0",
+                "monitor halt",
+                "monitor reset 0",
+                "tbreak main",
+                "continue",
+                "monitor halt",
+            ]
+        }
+    ]
+}
