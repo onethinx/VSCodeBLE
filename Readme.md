@@ -1,4 +1,5 @@
 # Onethinx Bluetooth example
+# MAY CONTAIN ERRORS, use at your own risk.
 
 # Description
 
